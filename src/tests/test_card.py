@@ -1,5 +1,5 @@
 import pytest
-from src.models.card import Card
+from solitaire.models.card import Card
 
 def test_card_initialization_valid():
     """Test creating cards with valid suits and values."""
