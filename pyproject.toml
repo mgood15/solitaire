@@ -1,8 +1,17 @@
+[tool.poetry]
+package-mode = true
+
+[tool.poetry.dependencies]
+python = ">=3.14"
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+pythonpath = ["src"]
+
 [project]
 name = "solitaire"
 version = "0.1.0"
 description = "Just an implementation of solitaire to play for fun."
-
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.14"
@@ -13,6 +22,9 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+test = "pytest:main"
 
 [dependency-groups]
 dev = [
