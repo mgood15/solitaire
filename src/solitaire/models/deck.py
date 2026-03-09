@@ -1,3 +1,4 @@
+import random
 from solitaire.models.card import Card
 
 class Deck:
@@ -18,8 +19,9 @@ class Deck:
         """
         Shuffles the deck of cards. Utilizes Fisher-Yates algorithm for randomness.
         """
-        # TODO: Implement in next commit
-        pass
+        for i in range(len(self.cards) - 1, 0, -1):
+            swap_i = random.randint(0, i)
+            self.cards[swap_i], self.cards[i] = self.cards[i], self.cards[swap_i]
 
     def draw(self):
         """
