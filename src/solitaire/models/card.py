@@ -31,8 +31,14 @@ class Card:
             self.color = "Black"
 
         # Map numerical value to name
+        self._actual_name = Card.NAMES.get(value, str(value))
 
-        self.name = Card.NAMES.get(value, str(value))
+    @property
+    def name(self):
+        """
+        Returns the name of the card if flipped, else 'Hidden Card'.
+        """
+        return self._actual_name if self.flipped else "Hidden Card"
 
     def flip(self):
         """
@@ -44,7 +50,12 @@ class Card:
         """
         Prints the Unicode symbol for the specific card.
         Mapping follows the Unicode Playing Cards block (U+1F0A0 - U+1F0DF).
+        If the card is not flipped, the card back symbol (U+1F0A0) is printed.
         """
+        if not self.flipped:
+            print(chr(0x1F0A0))
+            return
+
         # Base offsets for suits in the Unicode block
         suit_offsets = {
             "Spades": 0x1F0A0,
@@ -69,5 +80,9 @@ class Card:
     def print_full_name(self):
         """
         Prints the human-readable full name of the card (e.g., "Ace of Spades").
+        If the card is not flipped, prints "Hidden Card".
         """
-        print(f"{self.name} of {self.suit}")
+        if not self.flipped:
+            print("Hidden Card")
+        else:
+            print(f"{self.name} of {self.suit}")
