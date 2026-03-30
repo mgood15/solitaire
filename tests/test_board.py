@@ -61,9 +61,6 @@ def test_solitaire_setup():
     # Stock: 24 cards remaining (52 - 28)
     assert len(board.stock) == 24
 
-    # The first card in stock should be flipped, the rest should be face down (not flipped)
-    for i, card in enumerate(board.stock):
-        if i == 0:
-            assert card.flipped is True
-        else:
-            assert card.flipped is False
+    # All cards in stock should be face down
+    for card in board.stock:
+        assert card.flipped is False
