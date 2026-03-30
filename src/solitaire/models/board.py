@@ -41,8 +41,9 @@ class Board:
                     card.flip()
 
         # the first card in the stock should be revealed to the user
-        if not self.stock[0].flipped:
-            self.stock[0].flip()
+        if self.stock:
+            if not self.stock[0].flipped:
+                self.stock[0].flip()
 
     def print_board(self):
         """

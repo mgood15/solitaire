@@ -24,6 +24,7 @@ license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "pygame-ce (>=2.5.7,<3.0.0)"
 ]
 
 
