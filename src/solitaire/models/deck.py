@@ -1,5 +1,6 @@
 import random
 from solitaire.models.card import Card
+from solitaire.models.suit import Suit
 
 class Deck:
     """
@@ -11,7 +12,7 @@ class Deck:
         Initializes a standard 52-card deck.
         """
         self.cards = []
-        for suit in Card.VALID_SUITS:
+        for suit in Suit:
             for value in range(1, 14):
                 self.cards.append(Card(suit, value))
 

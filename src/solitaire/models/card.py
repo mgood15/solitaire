@@ -1,34 +1,33 @@
+from solitaire.models.color import Color
+from solitaire.models.suit import Suit
+
 class Card:
     """
     Represents a single playing card in a deck.
     """
 
-    VALID_SUITS = ["Hearts", "Diamonds", "Spades", "Clubs"]
     NAMES = {
         1: "Ace", 2: "Two", 3: "Three", 4: "Four", 5: "Five",
         6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten",
         11: "Jack", 12: "Queen", 13: "King"
     }
 
-    def __init__(self, suit: str, value: int):
+    def __init__(self, suit: Suit, value: int):
         """
         Initializes a card with a suit and a numerical value (1-13).
         """
-        self.suit = suit.capitalize()
-        if self.suit not in Card.VALID_SUITS:
-            raise ValueError(f"Invalid suit: {self.suit}. Must be one of {Card.VALID_SUITS}")
+        if not isinstance(suit, Suit):
+            raise ValueError(f"Invalid suit: {suit}. Must be a Suit enum")
 
         if not (1 <= value <= 13):
             raise ValueError(f"Invalid value: {value}. Must be between 1 and 13")
 
+        self.suit = suit
         self.value = value
         self.flipped = False
 
         # Determine color based on suit
-        if self.suit in ["Hearts", "Diamonds"]:
-            self.color = "Red"
-        else:
-            self.color = "Black"
+        self.color = suit.color
 
         # Map numerical value to name
         self._actual_name = Card.NAMES.get(value, str(value))
@@ -58,10 +57,10 @@ class Card:
 
         # Base offsets for suits in the Unicode block
         suit_offsets = {
-            "Spades": 0x1F0A0,
-            "Hearts": 0x1F0B0,
-            "Diamonds": 0x1F0C0,
-            "Clubs": 0x1F0D0
+            Suit.SPADES: 0x1F0A0,
+            Suit.HEARTS: 0x1F0B0,
+            Suit.DIAMONDS: 0x1F0C0,
+            Suit.CLUBS: 0x1F0D0
         }
 
         if self.suit not in suit_offsets:
@@ -85,4 +84,4 @@ class Card:
         if not self.flipped:
             print("Hidden Card")
         else:
-            print(f"{self.name} of {self.suit}")
+            print(f"{self.name} of {self.suit.label}")

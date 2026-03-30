@@ -1,8 +1,9 @@
 from collections import deque
 
 from solitaire.models.deck import Deck
-
 from solitaire.models.card import Card
+from solitaire.models.suit import Suit
+from solitaire.models.color import Color
 
 
 class Board:
@@ -175,13 +176,18 @@ class Board:
 
     def print_foundation(self):
         suit_symbols = {
-            0: "\U00002664",  # Spades
-            1: "\U00002661",  # Hearts
-            2: "\U00002662",  # Diamonds
-            3: "\U00002667"  # Clubs
+            Suit.SPADES: "\U00002664",  # Spades
+            Suit.HEARTS: "\U00002661",  # Hearts
+            Suit.DIAMONDS: "\U00002662",  # Diamonds
+            Suit.CLUBS: "\U00002667"  # Clubs
         }
         for i, pile in enumerate(self.foundation):
             if len(pile) > 0:
                 pile[-1].print_unicode()
             else:
-                print(suit_symbols[i])
+                # This might need to be indexed differently if we want specific suit symbols for each foundation slot
+                # For now, let's keep the logic as it was (indexed by 0-3) if possible, 
+                # but it's better to use Suit enums.
+                # Assuming foundation[0] is Spades, 1 is Hearts, etc. based on the previous dictionary.
+                suits = [Suit.SPADES, Suit.HEARTS, Suit.DIAMONDS, Suit.CLUBS]
+                print(suit_symbols[suits[i]])

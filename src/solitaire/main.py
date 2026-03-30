@@ -1,5 +1,6 @@
 import pygame
 from solitaire.models.board import Board
+from solitaire.models.color import Color
 
 # Constants for the game window and layout
 SCREEN_WIDTH = 1000
@@ -37,11 +38,11 @@ class Renderer:
             pygame.draw.rect(self.screen, WHITE, rect)
             pygame.draw.rect(self.screen, BLACK, rect, 2)
             
-            color = RED if card.color == "Red" else BLACK
+            color = RED if card.color == Color.RED else BLACK
             
             # Full text representation of the card
             name_text = self.font.render(card._actual_name, True, color)
-            suit_text = self.font.render(card.suit, True, color)
+            suit_text = self.font.render(card.suit.label, True, color)
             self.screen.blit(name_text, (x + 5, y + 5))
             self.screen.blit(suit_text, (x + 5, y + 25))
 
